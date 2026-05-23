@@ -41,6 +41,7 @@ public class CharacterCreation : MonoBehaviour
 
         data.playerName = playerName;
         data.pronouns = selectedPronouns;
+        data.current_Money = 10000;
 
         SaveSystem.SaveGame(
             data,
