@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class CharacterCreation : MonoBehaviour
 {
     public TMP_InputField nameInput;
+    public TMP_Text Current_Chosen_PRNS;
+    public ErrorPopup popup;
 
     private string selectedPronouns = "";
 
@@ -16,6 +18,7 @@ public class CharacterCreation : MonoBehaviour
     public void SelectPronouns(string pronouns)
     {
         selectedPronouns = pronouns;
+        Current_Chosen_PRNS.text = "Current Pronouns: " + pronouns;
     }
 
     public void ConfirmCharacter()
@@ -24,7 +27,7 @@ public class CharacterCreation : MonoBehaviour
 
         if (string.IsNullOrEmpty(playerName))
         {
-            Debug.Log("Invalid name.");
+            popup.ShowError("Invalid name. Please enter a valid name.");
             return;
         }
 
@@ -32,9 +35,15 @@ public class CharacterCreation : MonoBehaviour
         {
             if (!char.IsLetterOrDigit(c))
             {
-                Debug.Log("Only letters and numbers allowed.");
+                popup.ShowError("Only Letters and numbers allowed");
                 return;
             }
+        }
+
+        if (string.IsNullOrEmpty(selectedPronouns))
+        {
+            popup.ShowError("Please select pronouns.");
+            return;
         }
 
         SaveData data = new SaveData();

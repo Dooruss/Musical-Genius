@@ -18,6 +18,8 @@ public class SongDetailsUI : MonoBehaviour
     private int selectedWeek;
     private int selectedYear;
 
+    public ErrorPopup popup;
+
     public void ShowSong(SongData song)
     {
         currentSong = song;
@@ -114,6 +116,13 @@ public class SongDetailsUI : MonoBehaviour
 
     public void ReleaseSong()
     {
+        if (currentSong.releaseYear < TimeManager.Instance.currentYear ||
+            (currentSong.releaseYear == TimeManager.Instance.currentYear && currentSong.releaseWeek <= TimeManager.Instance.currentWeek))
+        {
+            popup.ShowError("Release date must be in the future.");
+            return;
+        }
+
         currentSong.isReleased = true;
 
         currentSong.releaseWeek = selectedWeek;
