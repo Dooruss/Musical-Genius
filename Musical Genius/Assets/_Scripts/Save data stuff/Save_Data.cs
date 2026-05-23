@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 [Serializable] //to tell that this class can be turned into a JSON
 public class SaveData
@@ -7,4 +8,6 @@ public class SaveData
     public string playerName;
     public string pronouns;
     public int current_Money;
+
+    public List<SongData> songs = new List<SongData>();
 }
