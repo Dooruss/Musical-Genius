@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,7 +27,7 @@ public class UnreleasedSongsUI : MonoBehaviour
 
         foreach (SongData song in data.songs)
         {
-            if (!song.isReleased)
+            if (!song.isReleased && !song.upcomingRelease)
             {
                 GameObject buttonObj = Instantiate( songButtonPrefab, contentParent);
 

@@ -41,17 +41,13 @@ public class SongCreator : MonoBehaviour
         // CREATE SONG
 
         SongData newSong = new SongData();
-
+        newSong.songID = System.Guid.NewGuid().ToString(); //NewGuid makes a unique ID for the song (Tbh very handy)
         newSong.songName = songName;
-
         newSong.genre = selectedGenre;
-
         newSong.isReleased = false;
-
         newSong.onEP = false;
-
         newSong.onAlbum = false;
-
+        newSong.onMixTape = false;
 
         // add stuff for quality here later!!!!!!!!!!!
 

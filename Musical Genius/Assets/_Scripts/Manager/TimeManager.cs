@@ -27,7 +27,8 @@ public class TimeManager : MonoBehaviour
         int slot = Game_Manager.Instance.currentSlot;
         SaveData data = SaveSystem.LoadGame(slot);
 
-        currentWeek++;
+        data.currentWeek++;
+        currentWeek = data.currentWeek;
 
         if (currentWeek > 52)
         {
@@ -40,8 +41,9 @@ public class TimeManager : MonoBehaviour
         data.currentYear = currentYear;
 
         SaveSystem.SaveGame(data, slot);
+        checkUpcomingReleases();
 
-        Debug.Log("Week " + currentWeek + ", Year " + currentYear);
+        //Debug.Log("Week " + currentWeek + ", Year " + currentYear);
     }
 
     public void LoadTimeFromSave()
@@ -51,5 +53,22 @@ public class TimeManager : MonoBehaviour
         currentWeek = data.currentWeek;
         currentYear = data.currentYear;
         Debug.Log("Loaded Time: Week " + currentWeek + ", Year " + currentYear);
+    }
+
+    public void checkUpcomingReleases()
+    {
+        int slot = Game_Manager.Instance.currentSlot;
+        SaveData data = SaveSystem.LoadGame(slot);
+        Debug.Log("Checking for upcoming releases for Week " + currentWeek + ", Year " + currentYear);
+        foreach (SongData song in data.songs)
+        {
+            if (song.upcomingRelease && song.releaseWeek == currentWeek && song.releaseYear == currentYear)
+            {
+                song.upcomingRelease = false;
+                song.isReleased = true;
+                Debug.Log("Released: " + song.songName);
+            }
+        }
+        SaveSystem.SaveGame(data, slot);
     }
 }

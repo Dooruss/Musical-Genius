@@ -42,14 +42,14 @@ public class SongDetailsUI : MonoBehaviour
     private void SaveCurrentSongData()
     {
         int slot = Game_Manager.Instance.currentSlot;
-
         SaveData data = SaveSystem.LoadGame(slot);
 
         for (int i = 0; i < data.songs.Count; i++)
         {
-            if (data.songs[i] == currentSong)
-            {
+            if (data.songs[i].songID == currentSong.songID)
+            {   
                 data.songs[i] = currentSong;
+                break;
             }
         }
 
@@ -116,21 +116,22 @@ public class SongDetailsUI : MonoBehaviour
 
     public void ReleaseSong()
     {
-        if (currentSong.releaseYear < TimeManager.Instance.currentYear ||
-            (currentSong.releaseYear == TimeManager.Instance.currentYear && currentSong.releaseWeek <= TimeManager.Instance.currentWeek))
+        if (selectedYear < TimeManager.Instance.currentYear ||
+            (selectedYear == TimeManager.Instance.currentYear && selectedWeek <= TimeManager.Instance.currentWeek))
         {
             popup.ShowError("Release date must be in the future.");
             return;
         }
 
-        currentSong.isReleased = true;
+        currentSong.upcomingRelease = true;
 
         currentSong.releaseWeek = selectedWeek;
         currentSong.releaseYear = selectedYear;
 
         SaveCurrentSongData();
+        FindFirstObjectByType<UnreleasedSongsUI>().OpenUnreleasedSongs();
 
-        Debug.Log(currentSong.songName + " scheduled for release.");
+        Debug.Log(currentSong.songName + " scheduled for release on Week " + currentSong.releaseWeek + ", Year " + currentSong.releaseYear);
     }
 
 }
