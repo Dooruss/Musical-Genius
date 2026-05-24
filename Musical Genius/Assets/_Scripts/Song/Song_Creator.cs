@@ -18,19 +18,7 @@ public class SongCreator : MonoBehaviour
     {
         string songName = songNameInput.text.Trim();
 
-        // MAKE SURE NOT EMPTY
-
-        if (string.IsNullOrEmpty(songName))
-        {
-            Debug.Log("Song needs a name.");
-            return;
-        }
-
-        if (string.IsNullOrEmpty(selectedGenre))
-        {
-            Debug.Log("Select a genre.");
-            return;
-        }
+        CheckIfFilled(songName);
 
         // LOAD CURRENT SAVE
 
@@ -61,5 +49,20 @@ public class SongCreator : MonoBehaviour
         SaveSystem.SaveGame(data, slot);
 
         Debug.Log("Song Created!");
+    }
+
+    private void CheckIfFilled(string songName)
+    {
+        if (string.IsNullOrEmpty(songName))
+        {
+            Debug.Log("Song needs a name.");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(selectedGenre))
+        {
+            Debug.Log("Select a genre.");
+            return;
+        }
     }
 }
