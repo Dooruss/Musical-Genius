@@ -19,7 +19,7 @@ public class GameUI : MonoBehaviour
         if (data != null)
         {
             nameText.text = data.playerName;
-            pronounText.text = data.pronouns;
+            pronounText.text = data.pronouns + ", " + data.age;
             moneyText.text = "$" + data.current_Money.ToString("N0", new CultureInfo("nl-NL"));
         }
     }
@@ -45,5 +45,13 @@ public class GameUI : MonoBehaviour
             go.SetActive(false);
         }   
         TurnOn.SetActive(true);
+    }
+
+    public void NextWeek()
+    {
+        TimeManager.Instance.AdvanceWeek();
+        int slot = Game_Manager.Instance.currentSlot;
+        SaveData data = SaveSystem.LoadGame(slot);
+        pronounText.text = data.pronouns + ", " + data.age;
     }
 }

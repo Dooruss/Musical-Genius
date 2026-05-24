@@ -6,8 +6,13 @@ public class SaveData
 {
     //Stores the player's name and pronouns for saving/loading purposes
     public string playerName;
+    public int age;
     public string pronouns;
     public int current_Money;
+    //Time
+    public int startYear;
+    public int currentYear;
+    public int currentWeek;
 
     public List<SongData> songs = new List<SongData>();
 }
