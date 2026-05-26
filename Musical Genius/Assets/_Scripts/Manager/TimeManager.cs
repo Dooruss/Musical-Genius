@@ -24,23 +24,22 @@ public class TimeManager : MonoBehaviour
 
     public void AdvanceWeek()
     {
-        int slot = Game_Manager.Instance.currentSlot;
-        SaveData data = SaveSystem.LoadGame(slot);
+        var save = SaveManager.Instance.currentSave;
 
-        data.currentWeek++;
-        currentWeek = data.currentWeek;
+        save.currentWeek++;
+        currentWeek = save.currentWeek;
+        checkBirthday();
 
         if (currentWeek > 52)
         {
             currentWeek = 1;
             currentYear++;
-            data.age++;
         }
 
-        data.currentWeek = currentWeek;
-        data.currentYear = currentYear;
+        save.currentWeek = currentWeek;
+        save.currentYear = currentYear;
 
-        SaveSystem.SaveGame(data, slot);
+        SaveManager.Instance.Save();
         checkUpcomingReleases();
 
         //Debug.Log("Week " + currentWeek + ", Year " + currentYear);
@@ -48,19 +47,17 @@ public class TimeManager : MonoBehaviour
 
     public void LoadTimeFromSave()
     {
-        int slot = Game_Manager.Instance.currentSlot;
-        SaveData data = SaveSystem.LoadGame(slot);
-        currentWeek = data.currentWeek;
-        currentYear = data.currentYear;
+        var save = SaveManager.Instance.currentSave;
+        currentWeek = save.currentWeek;
+        currentYear = save.currentYear;
         Debug.Log("Loaded Time: Week " + currentWeek + ", Year " + currentYear);
     }
 
     public void checkUpcomingReleases()
     {
-        int slot = Game_Manager.Instance.currentSlot;
-        SaveData data = SaveSystem.LoadGame(slot);
         Debug.Log("Checking for upcoming releases for Week " + currentWeek + ", Year " + currentYear);
-        foreach (SongData song in data.songs)
+        var save = SaveManager.Instance.currentSave;
+        foreach (SongData song in save.songs)
         {
             if (song.upcomingRelease && song.releaseWeek == currentWeek && song.releaseYear == currentYear)
             {
@@ -69,6 +66,17 @@ public class TimeManager : MonoBehaviour
                 Debug.Log("Released: " + song.songName);
             }
         }
-        SaveSystem.SaveGame(data, slot);
+        SaveManager.Instance.Save();
+    }
+
+    public void checkBirthday()
+    {
+        var save = SaveManager.Instance.currentSave;
+        if (save.birthday_week == currentWeek)
+        {
+            Debug.Log("Happy Birthday " + save.playerName + "! You are now " + (save.age + 1) + " years old!");
+            save.age += 1;
+            SaveManager.Instance.Save();
+        }
     }
 }

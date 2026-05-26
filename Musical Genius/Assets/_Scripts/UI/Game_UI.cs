@@ -12,9 +12,8 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
-        int slot = Game_Manager.Instance.currentSlot;
 
-        SaveData data = SaveSystem.LoadGame(slot);
+        var data = SaveManager.Instance.currentSave;
 
         if (data != null)
         {
@@ -50,8 +49,7 @@ public class GameUI : MonoBehaviour
     public void NextWeek()
     {
         TimeManager.Instance.AdvanceWeek();
-        int slot = Game_Manager.Instance.currentSlot;
-        SaveData data = SaveSystem.LoadGame(slot);
+        var data = SaveManager.Instance.currentSave;
         pronounText.text = data.pronouns + ", " + data.age;
     }
 }

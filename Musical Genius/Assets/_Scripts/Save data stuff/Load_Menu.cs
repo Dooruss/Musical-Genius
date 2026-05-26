@@ -16,7 +16,8 @@ public class LoadMenu : MonoBehaviour
             SaveSlotUI ui = saveInfoPanels[i - 1].GetComponent<SaveSlotUI>();
             if (SaveSystem.SaveExists(i))
             {
-                SaveData data = SaveSystem.LoadGame(i);
+                SaveManager.Instance.Load(i);
+                var data = SaveManager.Instance.currentSave;
                 ui.Setup(data);
             } else
             {

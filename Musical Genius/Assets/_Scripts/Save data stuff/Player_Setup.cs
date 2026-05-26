@@ -7,6 +7,7 @@ public class CharacterCreation : MonoBehaviour
 {
     public TMP_InputField nameInput;
     public TMP_InputField ageInput;
+    public TMP_InputField birthdayweekInput;
     public TMP_InputField startYearInput;
     public TMP_Text Current_Chosen_PRNS;
     public ErrorPopup popup;
@@ -60,6 +61,12 @@ public class CharacterCreation : MonoBehaviour
             return;
         }
 
+        if (!int.TryParse(birthdayweekInput.text, out int birthdayWeek) || birthdayWeek < 1 || birthdayWeek > 52)
+        {
+            popup.ShowError("Invalid birthday week. Please enter a valid week between 1 and 52.");
+            return;
+        }
+
         //START YEAR
         if (!int.TryParse(startYearInput.text, out int startYear) || startYear < 1930)
         {
@@ -73,15 +80,14 @@ public class CharacterCreation : MonoBehaviour
         data.playerName = playerName;
         data.pronouns = selectedPronouns;
         data.age = age;
+        data.birthday_week = birthdayWeek;
         data.startYear = startYear;
         data.current_Money = 10000;
         data.currentYear = startYear;
         data.currentWeek = 1;
 
-        SaveSystem.SaveGame(
-            data,
-            Game_Manager.Instance.currentSlot
-        );
+        SaveManager.Instance.currentSave = data;
+        SaveManager.Instance.Save();
 
         TimeManager.Instance.LoadTimeFromSave();
 

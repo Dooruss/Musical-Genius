@@ -20,11 +20,6 @@ public class SongCreator : MonoBehaviour
 
         CheckIfFilled(songName);
 
-        // LOAD CURRENT SAVE
-
-        int slot = Game_Manager.Instance.currentSlot;
-
-        SaveData data = SaveSystem.LoadGame(slot);
 
         // CREATE SONG
 
@@ -39,16 +34,10 @@ public class SongCreator : MonoBehaviour
 
         // add stuff for quality here later!!!!!!!!!!!
 
-
-        // ADD TO SONG LIST
-
-        data.songs.Add(newSong);
-
         // SAVE AGAIN
 
-        SaveSystem.SaveGame(data, slot);
-
-        Debug.Log("Song Created!");
+        SaveManager.Instance.currentSave.songs.Add(newSong);
+        SaveManager.Instance.Save();
     }
 
     private void CheckIfFilled(string songName)

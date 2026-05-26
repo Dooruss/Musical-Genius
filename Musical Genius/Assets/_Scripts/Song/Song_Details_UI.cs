@@ -41,8 +41,7 @@ public class SongDetailsUI : MonoBehaviour
 
     private void SaveCurrentSongData()
     {
-        int slot = Game_Manager.Instance.currentSlot;
-        SaveData data = SaveSystem.LoadGame(slot);
+        var data = SaveManager.Instance.currentSave;
 
         for (int i = 0; i < data.songs.Count; i++)
         {
@@ -53,7 +52,7 @@ public class SongDetailsUI : MonoBehaviour
             }
         }
 
-        SaveSystem.SaveGame(data, slot);
+        SaveManager.Instance.Save();
     }
 
     public void ChangeName()

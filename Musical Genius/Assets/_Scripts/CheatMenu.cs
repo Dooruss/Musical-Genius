@@ -50,16 +50,14 @@ public class CheatMenu : MonoBehaviour
 
     public void SetMoney(int amount)
     {
-        int slot = Game_Manager.Instance.currentSlot;
-        SaveData data = SaveSystem.LoadGame(slot);
+        var data = SaveManager.Instance.currentSave;
         data.current_Money = amount;
-        SaveSystem.SaveGame(data, slot);
+        SaveManager.Instance.Save();
     }
 
     public void CheckUpcomingReleases()
     {
-        int slot = Game_Manager.Instance.currentSlot;
-        SaveData data = SaveSystem.LoadGame(slot);
+        SaveData data = SaveManager.Instance.currentSave;
         foreach (SongData song in data.songs)
         {
             if (song.upcomingRelease && song.releaseYear == TimeManager.Instance.currentYear && song.releaseWeek == TimeManager.Instance.currentWeek)

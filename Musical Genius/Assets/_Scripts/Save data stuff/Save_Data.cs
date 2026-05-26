@@ -7,6 +7,7 @@ public class SaveData
     //Stores the player's name and pronouns for saving/loading purposes
     public string playerName;
     public int age;
+    public int birthday_week;
     public string pronouns;
     public int current_Money;
     //Time

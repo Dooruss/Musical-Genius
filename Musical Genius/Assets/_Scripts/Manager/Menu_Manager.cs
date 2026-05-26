@@ -19,8 +19,8 @@ public class MenuManager : MonoBehaviour
         if (SaveSystem.SaveExists(slot))
         {
             Game_Manager.Instance.currentSlot = slot;
+            SaveManager.Instance.Load(slot);
             TimeManager.Instance.LoadTimeFromSave();
-
             SceneManager.LoadScene("GAME");
         }
         else

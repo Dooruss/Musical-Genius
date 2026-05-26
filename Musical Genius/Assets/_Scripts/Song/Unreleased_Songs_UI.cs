@@ -19,9 +19,7 @@ public class UnreleasedSongsUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        int slot = Game_Manager.Instance.currentSlot;
-
-        SaveData data = SaveSystem.LoadGame(slot);
+        var data = SaveManager.Instance.currentSave;
 
         // CREATE BUTTONS
 

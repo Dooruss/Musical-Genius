@@ -5822,7 +5822,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -318.7, y: 2.4114685}
+  m_AnchoredPosition: {x: -318.69995, y: 2.411499}
   m_SizeDelta: {x: -640.0545, y: -312.02295}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1857701691
@@ -6011,6 +6011,7 @@ GameObject:
   - component: {fileID: 1910330675}
   - component: {fileID: 1910330676}
   - component: {fileID: 1910330677}
+  - component: {fileID: 1910330678}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -6060,6 +6061,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
   currentWeek: 1
   currentYear: 2000
+--- !u!114 &1910330678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910330674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 166d2863ff7451549a9df69d7f3eeedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveManager
+  currentSave:
+    playerName: 
+    age: 0
+    birthday_week: 0
+    pronouns: 
+    current_Money: 0
+    startYear: 0
+    currentYear: 0
+    currentWeek: 0
+    songs: []
+  currentSlot: 0
 --- !u!1 &1920207236
 GameObject:
   m_ObjectHideFlags: 0
