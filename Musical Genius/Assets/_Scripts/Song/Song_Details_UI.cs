@@ -154,6 +154,7 @@ public class SongDetailsUI : MonoBehaviour
         FindFirstObjectByType<UnreleasedSongsUI>().OpenUnreleasedSongs();
 
         Debug.Log(currentSong.songName + " scheduled for release on Week " + currentSong.releaseWeek + ", Year " + currentSong.releaseYear);
+        gameObject.SetActive(false);
     }
 
 }
