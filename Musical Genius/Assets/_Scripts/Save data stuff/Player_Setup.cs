@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +11,8 @@ public class CharacterCreation : MonoBehaviour
     public TMP_Text Current_Chosen_PRNS;
     public ErrorPopup popup;
 
+    public CharacterStatsUI CharachterStats;
+
     private string selectedPronouns = "";
 
     private void Start()
@@ -19,6 +20,7 @@ public class CharacterCreation : MonoBehaviour
         nameInput.characterLimit = 20;
         ageInput.characterLimit = 3;
         startYearInput.characterLimit = 4;
+        CharachterStats = GetComponent<CharacterStatsUI>();
     }
 
     public void SelectPronouns(string pronouns)
@@ -85,6 +87,12 @@ public class CharacterCreation : MonoBehaviour
         data.current_Money = 10000;
         data.currentYear = startYear;
         data.currentWeek = 1;
+        //Stats
+        data.availablePoints = CharachterStats.availablePoints;
+        data.livePerformance = CharachterStats.livePerformance;
+        data.songWriting = CharachterStats.songWriting;
+        data.vocals = CharachterStats.vocals;
+        data.producing = CharachterStats.producing;
 
         SaveManager.Instance.currentSave = data;
         SaveManager.Instance.Save();

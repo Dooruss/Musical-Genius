@@ -15,5 +15,12 @@ public class SaveData
     public int currentYear;
     public int currentWeek;
 
+    //Stats
+    public int availablePoints = 50;
+    public int livePerformance = 0;
+    public int songWriting = 0;
+    public int vocals = 0;
+    public int producing = 0;
+
     public List<SongData> songs = new List<SongData>();
 }

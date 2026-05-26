@@ -41,13 +41,19 @@ public class CheatMenu : MonoBehaviour
             case "advancetime":
                 AdvanceTime(int.Parse(parts[1]));
                 break;
+            case "checkstat":
+                checkStat(parts[1]);
+                break;
+            case "setstat":
+                Setstats(parts[1], int.Parse(parts[2]));
+                break;
             default:
                 Debug.Log("Unknown command." + cmd);
                 break;
         }
     }
 
-
+    #region Setting stuff
     public void SetMoney(int amount)
     {
         var data = SaveManager.Instance.currentSave;
@@ -55,6 +61,41 @@ public class CheatMenu : MonoBehaviour
         SaveManager.Instance.Save();
     }
 
+    public void AdvanceTime(int weeks)
+    {
+        for (int i = 0; i < weeks; i++)
+        {
+            TimeManager.Instance.AdvanceWeek();
+        }
+    }
+
+    public void Setstats(string stat, int value)
+    {
+        var data = SaveManager.Instance.currentSave;
+        switch (stat.ToLower())
+        {
+            case "performance":
+                data.livePerformance = value;
+                break;
+            case "writing":
+                data.songWriting = value;
+                break;
+            case "vocals":
+                data.vocals = value;
+                break;
+            case "producing":
+                data.producing = value;
+                break;
+            default:
+                Debug.Log("Unknown stat." + stat);
+                break;
+        }
+        checkIllegallStats();
+        SaveManager.Instance.Save();
+    }
+    #endregion
+
+    #region Checking Stuff
     public void CheckUpcomingReleases()
     {
         SaveData data = SaveManager.Instance.currentSave;
@@ -67,12 +108,46 @@ public class CheatMenu : MonoBehaviour
         }
     }
 
-    public void AdvanceTime(int weeks)
+    public void checkStat(string stat)
     {
-        for (int i = 0; i < weeks; i++)
+        var data = SaveManager.Instance.currentSave;
+        switch (stat.ToLower())
         {
-            TimeManager.Instance.AdvanceWeek();
+            case "performance":
+                Debug.Log("Live Performance: " + data.livePerformance);
+                break;
+            case "writing":
+                Debug.Log("Song Writing: " + data.songWriting);
+                break;
+            case "vocals":
+                Debug.Log("Vocals: " + data.vocals);
+                break;
+            case "producing":
+                Debug.Log("Producing: " + data.producing);
+                break;
+            default:
+                Debug.Log("Unknown stat." + stat);
+                break;
         }
     }
+    #endregion
 
+    private void checkIllegallStats()
+    {
+        var data = SaveManager.Instance.currentSave;
+        if (data.livePerformance < 0 || data.songWriting < 0 || data.vocals < 0 || data.producing < 0)
+        {
+            if (data.livePerformance < 0) data.livePerformance = 0;
+            if (data.songWriting < 0) data.songWriting = 0;
+            if (data.vocals < 0) data.vocals = 0;
+            if (data.producing < 0) data.producing = 0;
+        }
+        if (data.livePerformance > 100 || data.songWriting > 100 || data.vocals > 100 || data.producing > 100)
+        {
+            if (data.livePerformance > 100) data.livePerformance = 100;
+            if (data.songWriting > 100) data.songWriting = 100;
+            if (data.vocals > 100) data.vocals = 100;
+            if (data.producing > 100) data.producing = 100;
+        }
+    }
 }
