@@ -4,10 +4,11 @@ using UnityEngine;
 public class SongDetailsUI : MonoBehaviour
 {
     public TMP_Text songNameText;
-
     public TMP_Text genreText;
-
     public TMP_Text qualityText;
+    public TMP_Text explicityText;
+    
+    public bool isExplicit;
 
     private SongData currentSong;
 
@@ -53,6 +54,7 @@ public class SongDetailsUI : MonoBehaviour
         }
 
         SaveManager.Instance.Save();
+        ShowSong(currentSong);
     }
 
     public void ChangeName()
@@ -111,6 +113,27 @@ public class SongDetailsUI : MonoBehaviour
         }
 
         UpdateReleaseDateUI();
+    }
+
+    public void makeExplicit()
+    {
+        currentSong.isExplicit = !currentSong.isExplicit;
+        SaveCurrentSongData();
+        UpdateExplicitUI();
+    }
+
+    public void UpdateExplicitUI()
+    {
+        if (currentSong.isExplicit)
+        {
+            explicityText.text = "Explicit";
+            explicityText.color = Color.red;
+        }
+        else
+        {
+            explicityText.text = "Clean";
+            explicityText.color = Color.green;
+        }
     }
 
     public void ReleaseSong()

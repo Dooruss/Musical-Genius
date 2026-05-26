@@ -6,6 +6,7 @@ public class SongData
     public string songID;
     public string songName;
     public string genre;
+    public bool isExplicit;
 
     //Project related
     public bool onEP;
