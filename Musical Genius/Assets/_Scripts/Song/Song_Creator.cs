@@ -32,7 +32,8 @@ public class SongCreator : MonoBehaviour
         newSong.onAlbum = false;
         newSong.onMixTape = false;
 
-        // add stuff for quality here later!!!!!!!!!!!
+        // Quality
+        newSong.quality = MakeQuality();
 
         // SAVE AGAIN
 
@@ -53,5 +54,23 @@ public class SongCreator : MonoBehaviour
             Debug.Log("Select a genre.");
             return;
         }
+    }
+
+
+    private int MakeQuality()
+    {
+        var data = SaveManager.Instance.currentSave;
+        Genre_Data Genre = Genre_Database.GetGenre(selectedGenre);
+
+       if (Genre == null)
+        {
+            Debug.LogError("Genre not found: " + selectedGenre);
+            return 0; // Return a default quality if genre is not found
+        }
+
+       float quality = data.vocals * Genre.VocalsWeight + data.producing * Genre.ProducingWeight + data.songWriting * Genre.SongWritingWeight + data.livePerformance * Genre.LivePerformanceWeight;
+        quality += Random.Range(-5f, 25f); // Add some randomness to the quality
+
+        return Mathf.Clamp(Mathf.RoundToInt(quality), 0, 100); // Ensure quality is between 0 and 100
     }
 }
