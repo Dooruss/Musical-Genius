@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class SongData
@@ -26,8 +28,13 @@ public class SongData
     public bool isReleased;
     public bool upcomingRelease;
 
-    //Future stuff
-    public int quality;
-    public string artworkPath;
+    //Features
+    public List<NPCArtist> featuredArtists;
     public string featureDisplayType;
+
+    // Other
+    public int quality;
+
+    //Future stuff
+    public string artworkPath;
 }

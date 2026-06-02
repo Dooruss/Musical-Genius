@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable] //to tell that this class can be turned into a JSON
 public class SaveData
 {
-    //Stores the player's name and pronouns for saving/loading purposes
+    //Info
     public string playerName;
     public int age;
     public int birthday_week;
@@ -23,4 +23,5 @@ public class SaveData
     public int producing = 0;
 
     public List<SongData> songs = new List<SongData>();
+    public List<AlbumData> albums = new List<AlbumData>();
 }
