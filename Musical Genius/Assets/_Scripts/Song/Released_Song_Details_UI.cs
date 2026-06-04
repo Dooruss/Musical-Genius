@@ -22,7 +22,7 @@ public class ReleasedSongDetailsUI : MonoBehaviour
         explicityText.text = "Explicit: " + (song.isExplicit ? "Yes" : "No");
         releaseDateText.text = $"Released: Week {song.releaseWeek}, Year {song.releaseYear}";
         featuresText.text = $"Features: {song.featureDisplayType}";
-        //Sprite sprite = ImageLoader.LoadSpriteFromFile(song.artworkPath);
-        //if (sprite != null) trackImage.sprite = sprite;
+        Sprite sprite = song.artworkPath;
+        if (sprite != null) trackImage.sprite = sprite;
     }
 }

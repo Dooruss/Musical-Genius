@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class SongData
@@ -36,5 +36,5 @@ public class SongData
     public int quality;
 
     //Future stuff
-    public string artworkPath;
+    public Sprite artworkPath;
 }

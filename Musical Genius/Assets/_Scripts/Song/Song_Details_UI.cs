@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SongDetailsUI : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class SongDetailsUI : MonoBehaviour
     public TMP_Text genreText;
     public TMP_Text qualityText;
     public TMP_Text explicityText;
+    public Image artworkImage;
     
     public bool isExplicit;
 
@@ -33,6 +35,8 @@ public class SongDetailsUI : MonoBehaviour
 
         qualityText.text = "Quality: " + song.quality;
 
+        artworkImage.sprite = song.artworkPath;
+
         selectedWeek = TimeManager.Instance.currentWeek;
 
         selectedYear = TimeManager.Instance.currentYear;
@@ -52,7 +56,7 @@ public class SongDetailsUI : MonoBehaviour
                 break;
             }
         }
-
+        SaveSprite();
         SaveManager.Instance.Save();
         ShowSong(currentSong);
     }
@@ -149,12 +153,18 @@ public class SongDetailsUI : MonoBehaviour
 
         currentSong.releaseWeek = selectedWeek;
         currentSong.releaseYear = selectedYear;
+        currentSong.artworkPath = artworkImage.sprite; 
 
         SaveCurrentSongData();
         FindFirstObjectByType<UnreleasedSongsUI>().OpenUnreleasedSongs();
 
         Debug.Log(currentSong.songName + " scheduled for release on Week " + currentSong.releaseWeek + ", Year " + currentSong.releaseYear);
         gameObject.SetActive(false);
+    }
+
+    public void SaveSprite()
+    {
+        currentSong.artworkPath = artworkImage.sprite;
     }
 
 }

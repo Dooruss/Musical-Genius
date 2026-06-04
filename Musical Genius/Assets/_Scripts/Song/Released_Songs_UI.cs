@@ -29,9 +29,9 @@ public class ReleasedSongsUI : MonoBehaviour
 
                 Image img = buttonObj.GetComponentInChildren<Image>();
 
-                //Sprite sprite = ImageLoader.LoadSpriteFromFile(song.artworkPath);
+                Sprite sprite = song.artworkPath;
 
-                //if (sprite != null) img.sprite = sprite;
+                if (sprite != null) img.sprite = sprite;
 
                 Button button = buttonObj.GetComponent<Button>();
 

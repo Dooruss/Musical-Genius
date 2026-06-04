@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefdfa6c6431b38469655470cdc1e669, type: 3}
+  m_Name: Ariana Grande
+  m_EditorClassIdentifier: Assembly-CSharp::NPC_Artist
+  artistID: 
+  npcName: Ariana Grande-Butera
+  npcStageName: Ariana Grande
+  npcAge: 0
+  npcBirthdayWeek: 0
+  pronouns: She/Her
+  artistPhoto: {fileID: 0}
+  currentLabel: 
+  songs: []
+  albums: []
+  popularity:
+    africa: 0
+    asia: 0
+    europe: 0
+    northAmerica: 0
+    southAmerica: 0
+    australia: 0
+  chartHistory: []
