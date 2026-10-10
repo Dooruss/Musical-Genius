@@ -21,7 +21,15 @@ public class SaveData
     public int songWriting = 0;
     public int vocals = 0;
     public int producing = 0;
+    public RegionalPopularity popularity;
 
+    // Projects!
     public List<SongData> songs = new List<SongData>();
     public List<AlbumData> albums = new List<AlbumData>();
+    public List<SoundtrackData> soundtracks = new List<SoundtrackData>();
+    public List<MixtapeData> mixtapes = new List<MixtapeData>();
+    public List<EPData> eps = new List<EPData>();
+
+    //Others
+    public Job_Data currentJob;
 }

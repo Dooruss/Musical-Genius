@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
@@ -79,4 +80,35 @@ public class TimeManager : MonoBehaviour
             SaveManager.Instance.Save();
         }
     }
+
+    #region Job Stuff
+    public void checkJob()
+    {
+        var save = SaveManager.Instance.currentSave;
+        if (save.currentJob == null) { return; }
+
+        var job = save.currentJob;
+
+        if (save.currentJob.endWeek == currentWeek && save.currentJob.endYear == currentYear)
+        {
+            Debug.Log("Your job as " + job.jobTitle + " has ended.");
+            job = null;
+            SaveManager.Instance.Save();
+            return;
+        }
+        checkIfSalaryTime();
+
+        save.currentJob.weeksAtJob++;
+        SaveManager.Instance.Save();
+
+    }
+
+    public void checkIfSalaryTime()
+    {
+        var save = SaveManager.Instance.currentSave;
+        var currentJob = save.currentJob;
+        //Check if its time for you to get salary!!!!
+    }
+
+    #endregion
 }

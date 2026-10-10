@@ -35,7 +35,6 @@ public static class SaveSystem
 
     private static string GetSavePath(int slot)
     {
-        return Application.persistentDataPath +
-               "/save_slot_" + slot + ".json";
+        return Application.persistentDataPath + "/save_slot_" + slot + ".json";
     }
 }
